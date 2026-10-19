@@ -1,0 +1,12 @@
+name: Check ModelScope Models
+on: workflow_dispatch
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query available models
+        run: |
+          curl -s "https://api-inference.modelscope.cn/v1/models" \
+            -H "Authorization: Bearer ${{ secrets.DASHScope_API_KEY }}" \
+            | jq -r '.data[].id'
